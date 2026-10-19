@@ -7,3 +7,5 @@
 # Python bytecode files
 __pycache__/
 *.pyc
+# MyST build outputs
+_build

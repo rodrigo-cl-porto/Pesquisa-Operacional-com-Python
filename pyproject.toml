@@ -1,0 +1,50 @@
+[project]
+name = "operations-research-with-python"
+version = "0.1.0"
+description = "A Jupyter Book to learn how to solve Operations Research problems with Python libraries like Pyomo, NetworkX and Sympy."
+readme = "README.md"
+authors = [
+    { name = "Rodrigo C. L. Porto", email = "rodrigo.cl.porto@gmail.com" }
+]
+requires-python = ">=3.13"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: Jupyter",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Education",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Text Processing :: Markup",
+]
+dependencies = [
+    "gurobipy>=13.0.3",
+    "highspy>=1.15.1",
+    "matplotlib>=3.11.2",
+    "networkx>=3.7",
+    "pyomo>=6.10.1",
+    "sympy>=1.14.0",
+]
+
+[readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+book = [
+    "ipywidgets>=8.1.9",
+    "jupyter-book>=2.1.7",
+    "jupyterlab>=4.6.4",
+    "jupyterlab-myst>=2.7.0",
+]
+dev = [
+    "poethepoet>=0.49.0",
+    "ruff>=0.17.1",
+    "ty>=0.0.89",
+]

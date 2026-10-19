@@ -1,0 +1,34 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: 5d8b8dc4-5f85-4efe-99c5-7462ddbd3528
+  title: Operations Research with Python
+  description:
+  keywords:
+    - Assignment Problem
+    - Critical Path
+    - Gurobipy
+    - Highspy
+    - Linear Optimization
+    - Maximum Flow
+    - Minimal Path
+    - Minimal Spanning Tree
+    - NetworkX
+    - Non Linear Optimization
+    - Pyomo
+    - Python
+    - Transportation Problem
+    - Transshipment Problem
+  authors:
+    - name: Rodrigo Celso de Lima Porto
+      email: rodrigo.cl.porto@gmail.com
+      corresponding: true
+      github: rodrigo-cl-porto
+      linkedin: https://www.linkedin.com/in/rodrigo-cl-porto
+  github: https://github.com/rodrigo-cl-porto/Pesquisa-Operacional-com-Python
+  # To autogenerate a Table of Contents, run "myst init --write-toc"
+site:
+  template: book-theme
+  # options:
+  #   favicon: favicon.ico
+  #   logo: site_logo.png

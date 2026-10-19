@@ -1,0 +1,26 @@
+# Task Runner: [Poe the Poet](https://poethepoet.natn.io/index.html)
+
+executor = "uv"
+verbosity = -1
+
+[tasks.clean]
+help = "Remove all unnecessary files and folders (except .venv)."
+shell = """
+    rm -rf .pytest_cache &
+    rm -rf .ruff_cache &
+    rm -rf book/_build
+"""
+
+[tasks.sync]
+help = "Install all the project dependencies."
+cmd = "uv sync --all-groups"
+
+[tasks.book]
+help = "Serve the Jupyter Book site."
+cmd = "jupyter-book start"
+cwd = "book"
+env = { NODE_TLS_REJECT_UNAUTHORIZED = "0" }
+
+[tasks.lint]
+help = "Lint the code using Ruff linter."
+cmd = "ruff check"

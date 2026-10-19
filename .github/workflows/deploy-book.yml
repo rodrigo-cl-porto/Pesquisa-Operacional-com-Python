@@ -1,0 +1,60 @@
+name: Deploy Jupyter Book
+on:
+  push:
+    branches: [main]
+    paths:
+      - "book/**"
+      - ".github/workflows/deploy-book.yml"
+  workflow_dispatch: # Allows you to manually trigger this workflow from the GitHub UI
+env:
+  # `BASE_URL` determines, relative to the root of the domain, the URL that your site is served from.
+  # E.g., if your site lives at `https://mydomain.org/myproject`, set `BASE_URL=/myproject`.
+  # If, instead, your site lives at the root of the domain, at `https://mydomain.org`, set `BASE_URL=''`.
+  BASE_URL: /${{ github.event.repository.name }}
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copy the Repo to Virtual Server
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: | # Copy only the necessary folders and files to virtual machine.
+            /book/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24.x
+
+      - name: Install Jupyter Book (via myst)
+        run: npm install -g jupyter-book
+
+      - name: Build HTML Assets
+        working-directory: book
+        run: jupyter-book build --html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: book/_build/html
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
